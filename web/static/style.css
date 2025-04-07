@@ -16,7 +16,7 @@ body {
 header {
     background-color: #9dfd6d;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 1rem 2rem;
+    padding: 10px 0px;
 }
 
 nav {
@@ -28,7 +28,7 @@ nav {
 }
 
 .logo img {
-    height: 70px;
+    height: 100px;
     width: auto;
 }
 
