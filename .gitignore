@@ -1,0 +1,63 @@
+# Archivos de Python
+__pycache__/
+
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+.venv
+.venv/
+.env/
+
+# Archivos de configuración sensibles
+*.env
+.env.*
+
+# Archivos de bases de datos
+*.sqlite3
+
+# Archivos de logs
+*.log
+
+# Archivos de compilación
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Configuración de IntelliJ IDEA
+.idea/
+*.iml
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de caché de Django
+*.pot
+*.pyc
+
+# Archivos estáticos generados
+staticfiles/
+media/
+
+# Cobertura de pruebas
+htmlcov/
+.coverage
+.tox/
+.nox/
+
+# Node (si usas npm para frontend)
+node_modules/
+package-lock.json
+
+# Migrations (opcional, dependiendo de tu flujo de trabajo)
+# Si decides incluirlas, comenta esta línea
+# */migrations/__pycache__/
+# */migrations/*.pyc
+# */migrations/*.pyo
+# */migrations/*.pyd
+# */migrations/*.log
+# */migrations/*.sqlite3
