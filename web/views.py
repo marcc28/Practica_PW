@@ -3,7 +3,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Book
+# from .models import Book
 
 # Create your views here.
 
@@ -24,7 +24,9 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
+"""
 @login_required
 def books(request):
     books = Book.objects.select_related('author').all()
     return render(request, 'books.html', {'books': books})
+"""
