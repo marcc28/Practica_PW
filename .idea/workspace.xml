@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2f7e380-50a8-4a34-a3b4-ef4f6610e7b0" name="Changes" comment="Project Created">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d2f7e380-50a8-4a34-a3b4-ef4f6610e7b0" name="Changes" comment="Added docker files" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +12,13 @@
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,7 +101,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744012286883</updated>
-      <workItem from="1744012287929" duration="3015000" />
+      <workItem from="1744012287929" duration="3837000" />
     </task>
     <task id="LOCAL-00001" summary="Project Created">
       <option name="closed" value="true" />
@@ -106,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744012512135</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added docker files">
+      <option name="closed" value="true" />
+      <created>1744018675100</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744018675100</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,6 +127,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project Created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Project Created" />
+    <MESSAGE value="Added docker files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added docker files" />
   </component>
 </project>
