@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}FOOTBALL CHAMPAN{% endblock %}</title>
     {% load static %}
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <img src="{% static 'images/logo.png' %}" alt="Logo FC">
+                <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo FC"></a>
             </div>
             <div class="nav-links">
                 <a href="{% url 'home' %}">Home</a>

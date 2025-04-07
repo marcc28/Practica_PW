@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% block title %}Welcome to the Library{% endblock %}
-
 {% block content %}
 <div class="home-container">
     {% if user.is_authenticated %}
@@ -11,7 +9,7 @@
             <a href="{% url 'books' %}" class="button">Browse books</a>
         </div>
     {% else %}
-        <h1>Welcome to my library!</h1>
+        <h1>Welcome to FOOTBALL CHAMPAN!</h1>
         <p>Please log in to access our content.</p>
         <div class="guest-actions">
             <a href="{% url 'login' %}" class="button">Login</a>
