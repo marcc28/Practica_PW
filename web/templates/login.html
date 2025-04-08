@@ -1,26 +1,50 @@
-{% extends 'base.html' %}
-
-{% block title %}Login - Library{% endblock %}
-
-{% block content %}
-<div class="login-container">
-    <h1>Login</h1>
-    <form method="post" class="login-form">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        {% if form.errors %}
-            <div class="error-message">
-                Invalid username or password.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Login - FUTBOL CHAMPAN{% endblock %}</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'auth.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- CARD ONE -->
+        <div class="card one">
+            <div class="content">
+                <img alt="Logo futbol champan" src="{% static 'images/logo.png' %}" type="image/png" class="logo">
+                <div style="text-align: center">
+                    <h1>Login</h1>    
+                </div>
+                <p>Log in to access our content!</p>
+                <form method="post" class="login-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username" class="label">Username:</label>
+                        <input type="text" id="username" placeholder="Enter your username" name="username" required class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="label">Password:</label>
+                        <input type="password" id="password" placeholder="Enter your password" name="password" required class="input">
+                    </div>
+                    {% if form.errors %}
+                        <div class="error-message">
+                            Invalid username or password.
+                        </div>
+                    {% endif %}
+                    <button type="submit" class="button">Login</button>
+                    <p>If you do not have an account, register <a href="{% url 'register' %}">here</a>.</p>
+                </form>
             </div>
-        {% endif %}
-        <button type="submit">Login</button>
-    </form>
-</div>
-{% endblock %} 
+        </div>
+        <!-- finish CARD ONE -->
+        <div class="card two">
+            <p class="covered-label">Image generated with AI</p>
+            <img style="height: 100%; width: auto; object-fit: cover"
+                    src="{% static 'images/elbiyolands.png' %} " alt="elbicho">
+        </div>
+        <!-- Finish card two-->
+    </div>
+</body>
+</html>

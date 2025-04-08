@@ -1,0 +1,94 @@
+body {
+    background: #faf8f2;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+
+}
+.container {
+    margin: 1% auto;
+    width: 90%;
+    height: 90%;
+    min-height: fit-content;
+    justify-content: center;
+    box-shadow: 0 6px 8px 2px rgba(0, 0, 0, 0.5); /* this adds the "card" effect */
+    top: 2.5%;
+    left: 5%;
+    position: absolute;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 50%;
+  height: 100%;
+}
+.one {
+    background: white;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+.two {
+  flex-grow: 1;
+}
+
+.content {
+  height: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.button {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #27ae60;
+    border: none;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    outline-color: black;
+}
+
+.button:hover {
+    background-color: #27ae60;
+    cursor: pointer;
+    color: black;
+}
+
+.logo {
+    height: 125px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+.label {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    display: block; /* para que quede arriba del input */
+}
+.input {
+    box-shadow: none;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    outline-color: #27ae60;
+}
+.covered-label {
+    margin-left: 10px;
+    margin-top: 0;
+    position: absolute;
+    color: white;
+}
