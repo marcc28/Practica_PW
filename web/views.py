@@ -23,10 +23,3 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
-
-"""
-@login_required
-def books(request):
-    books = Book.objects.select_related('author').all()
-    return render(request, 'books.html', {'books': books})
-"""
