@@ -11,7 +11,7 @@ class Player(models.Model):
     position = models.CharField(max_length=50)
     shirt_number = models.IntegerField()
     last_updated = models.DateTimeField()
-    current_team = models.ForeignKey('Team', related_name='players', on_delete=models.CASCADE, null=True, blank=True)
+    current_team = models.ForeignKey('Team', related_name='current_players', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
