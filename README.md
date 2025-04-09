@@ -23,25 +23,23 @@ Desenvolupar una aplicació funcional que permeti consultar dades del món del f
   - Registre d’usuari (`/register`)
   - Inici de sessió (`/login`)
   - Tancament de sessió (`/logout`)
-- ✅ **Plantilles HTML pròpies** amb herència (`base.html`)
+- ✅ **Plantilles HTML pròpies** amb herència (`base.html`) i sense
 - ✅ **Estils propis amb CSS**
 - ✅ **Contenidors Docker i `docker-compose`**
 - ✅ **Compliment dels principis [12factor](https://12factor.net/)**
 
 ---
 
-## ☝️ Consideracions
+## ☝️ Consideracions de disseny
 - `Simplicitat i claredat`: Hem optat per un disseny simple, clar i intuïtiu per fer la nostra pàgina web accessible a tots els usuaris.
-- ``
+- `Visuals`: Per una major claredaten el procès tant de registre com de login s'ha implementat un format independent a ```base.html```, utilitzant també un static diferent
+- `Reducció de models`: S'ha pres la decisió unanimament d'eliminar el model **Season** especificat en el plantejament de la web, ja que coonsiderem que sería més convenient aplicar-ho com a filtre de búsqueda
+- `Imatges`: En quant a imatges s'ha utilitzat un logotip i una imatge per cautivar l'atenció del públic, totes dues generades per intel·ligència artificial amb un toc personal dels memebres del grup
+- `Patró`: Aprofitant els exemples vists a classe i explicats pel professor, s'han agafat idees i estructures per una millor estructura del projecte
 
 ---
 
 ## ▶️ Execució del projecte
-
-Inicialització de Docker Compose 🐳
-```
-docker-compose up
-```
 
 Realitzar les migracions corresponents i aplicar-les a la base de dades:
 ```
