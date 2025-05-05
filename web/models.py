@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -46,6 +47,7 @@ class Match(models.Model):
     home_score = models.IntegerField(null=True, blank=True)  # Resultado de goles para el equipo local
     away_score = models.IntegerField(null=True, blank=True)  # Resultado de goles para el equipo visitante
     winner = models.CharField(max_length=50, null=True, blank=True)  # "home", "away", o "draw"
+    creador = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.home_team.name} vs {self.away_team.name}'
