@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Vols eliminar aquest partit?</h2>
+  <p>{{ object }}</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+  </form>
+  <a href="{% url 'llista-partits' %}">Cancel·lar</a>
+{% endblock %}
