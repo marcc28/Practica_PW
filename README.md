@@ -2,7 +2,7 @@
 
 Aplicació web desenvolupada amb **Django** que permet consultar informació relacionada amb **La Liga**: equips, jugadors i partits. Pensada com a projecte acadèmic dins l'assignatura de **Projecte Web**.
 
- 🔗 [Repositori GitHub](https://github.com/usuari/projecte-football-champan)
+ 🔗 [Repositori GitHub](https://github.com/marcc28/Practica_PW)
 
 ---
 
