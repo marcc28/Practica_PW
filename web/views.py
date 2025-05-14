@@ -55,3 +55,62 @@ class MatchDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         equip = self.get_object()
         return self.request.user == equip.creador
+
+class TeamCreateView(LoginRequiredMixin, CreateView):
+    model = Team
+    form_class = TeamForm
+    template_name = 'team_create.html'
+    success_url = reverse_lazy('teams')
+
+    def form_valid(self, form):
+        form.instance.creador = self.request.user
+        return super().form_valid(form)
+
+class TeamUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Team
+    form_class = TeamForm
+    template_name = 'team_create.html'
+    success_url = reverse_lazy('teams')
+
+    def test_func(self):
+        equip = self.get_object()
+        return self.request.user == equip.creador
+
+class TeamDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Team
+    template_name = 'team_confirm_delete.html'
+    success_url = reverse_lazy('teams')
+
+    def test_func(self):
+        equip = self.get_object()
+        return self.request.user == equip.creador
+
+
+class PlayerCreateView(LoginRequiredMixin, CreateView):
+    model = Player
+    form_class = PlayerForm
+    template_name = 'player_create.html'
+    success_url = reverse_lazy('players')
+
+    def form_valid(self, form):
+        form.instance.creador = self.request.user
+        return super().form_valid(form)
+
+class PlayerUpdateView(LoginRequiredMixin, UpdateView):
+    model = Player
+    form_class = PlayerForm
+    template_name = 'player_create.html'
+    success_url = reverse_lazy('players')
+
+    def test_func(self):
+        equip = self.get_object()
+        return self.request.user == equip.creador
+
+class PlayerDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Player
+    template_name = 'player_confirm_delete.html'
+    success_url = reverse_lazy('players')
+
+    def test_func(self):
+        equip = self.get_object()
+        return self.request.user == equip.creador
