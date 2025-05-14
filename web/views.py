@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
@@ -6,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Match, Team, Player
 from .forms import MatchForm, TeamForm, PlayerForm
+import requests
 # from .models import Book
 
 # Create your views here.
@@ -26,6 +28,39 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+def matchView(request):
+    return render(request, 'match.html')
+
+def teamView(request):
+    return render(request, 'team.html')
+
+def playerView(request):
+    return render(request, 'player.html')
+
+def getTeams(request):
+    headers = {
+        #TODO: modificar token
+        "X-Auth-Token" : "0ba4dbb5a5674096a1ae842cfe22366f"
+    }
+    url = "http://api.football-data.org/v4/competitions/PD/teams"
+    response = requests.get(url, headers=headers)
+
+    # Recuperar equips de la bse de datos
+    equipos = list(Team.objects.values())
+
+
+
+    if response.status_code == 200:
+        datos = response.json()
+        # Mezclar datos api amb base de datos
+        for team in equipos:
+            datos["teams"].append(team)
+
+        # Retornar les dades
+        return JsonResponse(datos)
+    else:
+        return JsonResponse({'error': 'No se pudo obtener la información'}, status=500)
 
 class MatchCreateView(LoginRequiredMixin, CreateView):
     model = Match
