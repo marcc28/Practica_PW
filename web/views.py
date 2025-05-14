@@ -4,8 +4,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
-from .models import Match
-from .forms import MatchForm
+from .models import Match, Team, Player
+from .forms import MatchForm, TeamForm, PlayerForm
 # from .models import Book
 
 # Create your views here.
@@ -44,17 +44,17 @@ class MatchUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('matches')
 
     def test_func(self):
-        equip = self.get_object()
-        return self.request.user == equip.creador
+        partit = self.get_object()
+        return self.request.user == partit.creador
 
 class MatchDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Match
     template_name = 'match_confirm_delete.html'
-    success_url = reverse_lazy('teams')
+    success_url = reverse_lazy('matches')
 
     def test_func(self):
-        equip = self.get_object()
-        return self.request.user == equip.creador
+        partit = self.get_object()
+        return self.request.user == partit.creador
 
 class TeamCreateView(LoginRequiredMixin, CreateView):
     model = Team
@@ -103,8 +103,8 @@ class PlayerUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('players')
 
     def test_func(self):
-        equip = self.get_object()
-        return self.request.user == equip.creador
+        jugador = self.get_object()
+        return self.request.user == jugador.creador
 
 class PlayerDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Player
@@ -112,5 +112,5 @@ class PlayerDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('players')
 
     def test_func(self):
-        equip = self.get_object()
-        return self.request.user == equip.creador
+        jugador = self.get_object()
+        return self.request.user == jugador.creador
