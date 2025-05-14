@@ -13,6 +13,7 @@ class Player(models.Model):
     shirt_number = models.IntegerField()
     last_updated = models.DateTimeField()
     current_team = models.ForeignKey('Team', related_name='current_players', on_delete=models.CASCADE, null=True, blank=True)
+    creador = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -30,6 +31,7 @@ class Team(models.Model):
     club_colors = models.CharField(max_length=100, null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
     players = models.ManyToManyField(Player)  # Relación de muchos a muchos con Player
+    creador = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
