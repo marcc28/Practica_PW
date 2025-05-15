@@ -8,7 +8,7 @@
     <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body>
+<body> data-user-id="{{ user.id | default:-1 }}"
     <header>
         <nav>
             <div class="logo">
@@ -17,9 +17,9 @@
             <div class="nav-links">
                 <a href="{% url 'home' %}">Home</a>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'teams' %}" class="button">Teams</a>
-                    <a href="{% url 'players' %}" class="button">Players</a>
-                    <a href="{% url 'matches' %}" class="button">Recent matches</a>
+                    <a href="{% url 'teams' %}">Teams</a>
+                    <a href="{% url 'players' %}">Players</a>
+                    <a href="{% url 'matches' %}">Recent matches</a>
                     <a href="{% url 'logout' %}">Logout</a>
                 {% else %}
                     <a href="{% url 'login' %}">Login</a>
