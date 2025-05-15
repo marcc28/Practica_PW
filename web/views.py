@@ -197,7 +197,20 @@ def getPlayers(request):
 
 
 def PlayerUpdate(request, equipo_id):
-    pass
+    if request.method == "PUT":
+        try:
+            data = json.loads(request.body)
+            player = Player.objects.get(id=equipo_id)
+            player.name = data.get('name', player.name)
+            player.nationality = data.get('nationality', player.nationality)
+            player.position = data.get('position', player.position)
+            player.save()
+
+            return JsonResponse({"mensaje": "Player updated"})
+        except Player.DoesNotExist:
+            return JsonResponse({'error': 'Equipo no encontrado'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
 
 
 def PlayerDelete(request, equipo_id):
