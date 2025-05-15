@@ -1,12 +1,11 @@
 $(document).ready(function () {
+    let equipos = [];
     $.ajax({
         url: 'api/teams', // Cambia por tu URL real o endpoint local
         method: 'GET',
         success: function (response) {
             $('#mensaje-error').hide();
-            console.log(response)
-            const equipos = response.teams;
-            console.log(equipos)
+            equipos = response.teams;
             renderEquipos(equipos)
         },
         error: function (xhr, status, error) {
