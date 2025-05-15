@@ -5,7 +5,7 @@
     <script src="{% static 'scripts/teams.js' %}"></script>
     <link rel="stylesheet" href="{% static 'styles/teams.css' %}">
 
-    <button>Create team</button>
+    <button id="btn-crear-equipo">Create team</button>
     <input type="text" id="buscador" placeholder="Buscar equipo por nombre..."/>
 
     <h1>Equipos</h1>
@@ -24,11 +24,45 @@
     <p id="mensaje-error" style="display: none; color: red;">Error al cargar los datos.</p>
     <div id="modal-overlay" class="modal-overlay hidden">
         <!-- Modal -->
-        <div id="modal" class="modal">
+        <div id="visualize-modal" class="modal hidden">
             <h2 id="modal-nombre"></h2>
             <p><strong>Fundado:</strong> <span id="modal-fundado"></span></p>
             <p><strong>Estadio:</strong> <span id="modal-estadio"></span></p>
             <button id="cerrar-modal">Cerrar</button>
+        </div>
+        <div id="edit-modal" class="modal hidden">
+            <h1>EDIT</h1>
+            <h2 id="modal-nombre"></h2>
+            <form id="form-editar-equipo">
+                <label>Nombre:</label>
+                <input type="text" id="modal-nombre-input" name="nombre">
+
+                <label>Fundado:</label>
+                <input type="number" id="modal-fundado-input" name="fundado">
+
+                <label>Estadio:</label>
+                <input type="text" id="modal-estadio-input" name="estadio">
+
+                <div class="modal-buttons">
+                    <button type="submit">Guardar cambios</button>
+                    <button type="button" id="cerrar-modal">Cancelar</button>
+                </div>
+            </form>
+            <button id="close-edit-modal">Cerrar</button>
+        </div>
+
+
+        <div id="create-modal" class="modal hidden">
+            <h2>Crear nuevo equipo</h2>
+            <form id="form-crear-equipo">
+                <input type="text" name="name" id="create-name" placeholder="Nombre del equipo" required><br>
+                <input type="number" name="founded" id="create-founded" placeholder="Año de fundación" required><br>
+                <input type="text" name="venue" id="create-venue" placeholder="Estadio" required><br>
+                <input type="text" name="coach" id="create-coach" placeholder="Entrenador" required><br>
+                <input type="url" name="crest" id="create-crest" placeholder="URL del escudo" required><br>
+                <button type="submit" id="btn-guardar-equipo">Crear</button>
+                <button type="button" id="cerrar-crear-modal">Cancelar</button>
+            </form>
         </div>
     </div>
 

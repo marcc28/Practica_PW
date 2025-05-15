@@ -12,15 +12,23 @@ urlpatterns = [
     path('matches/', matchView, name='matches'),
     path('teams/', teamView, name='teams'),
     path('players/', playerView, name='players'),
-    path('teams/api/teams/', views.getTeams, name='getTeams'),
 
-    path('match/create/', MatchCreateView.as_view(), name='match-create'),
-    path('match/<int:pk>/edit', MatchUpdateView.as_view(), name='match-edit'),
-    path('match/<int:pk>/delete/', MatchDeleteView.as_view(), name='match-delete'),
-    path('team/create/', TeamCreateView.as_view(), name='team-create'),
-    path('team/<int:pk>/edit', TeamUpdateView.as_view(), name='team-edit'),
-    path('team/<int:pk>/delete/', TeamDeleteView.as_view(), name='team-delete'),
-    path('player/create/', PlayerCreateView.as_view(), name='player-create'),
-    path('player/<int:pk>/edit', PlayerUpdateView.as_view(), name='player-edit'),
-    path('player/<int:pk>/delete/', PlayerDeleteView.as_view(), name='player-delete'),
+    #Teams urls
+    path('team/create/', TeamCreate, name='team-create'),
+    path('teams/api/teams/', views.getTeams, name='getTeams'),
+    path('team/<int:equipo_id>/edit', TeamUpdate, name='team-edit'),
+    path('team/<int:equipo_id>/delete/', TeamDelete, name='team-delete'),
+
+    # match urls
+    path('match/create/', MatchCreate, name='match-create'),
+    path('match/api/match/', views.getMatches, name='getMatch'),
+
+    path('match/<int:match_id>/edit', MatchUpdate, name='match-edit'),
+    path('match/<int:match_id>/delete/', MatchDelete, name='match-delete'),
+
+    # players url
+    path('player/create/', PlayerCreate, name='player-create'),
+    path('player/api/players/', views.getPlayers, name='get-players'),
+    path('player/<int:player_id>/edit', PlayerUpdate, name='player-edit'),
+    path('player/<int:player_id>/delete/', PlayerDelete, name='player-delete'),
 ]
