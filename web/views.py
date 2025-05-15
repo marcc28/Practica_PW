@@ -94,7 +94,7 @@ def getTeams(request):
             'founded': equipo.founded,
             'venue': equipo.venue,
             "creador_id": equipo.creador_id,
-            'coach': {'name': equipo.coach} if hasattr(equipo, 'coach_name') else {},
+            'coach': equipo.coach,
             'jugadores': [
                 {
                     'id': jugador.id,
@@ -151,7 +151,31 @@ def MatchCreate(request):
     pass
 
 def getMatches(request):
-    pass
+    from datetime import datetime, timedelta
+    headers = {
+        "X-Auth-Token": "0ba4dbb5a5674096a1ae842cfe22366f"
+    }
+    url = "http://api.football-data.org/v4/matches?competitions=PD"
+
+    # la api solo nos permite recuperar los partidos de los últimos 10 días
+    # si no especificamos fechas solo devuelve los últimos 3 partidos.
+    current_date = datetime.now()
+    ten_days_ago = current_date - timedelta(days=10)
+
+    current_string = current_date.strftime('%Y-%m-%d')
+    ten_string = ten_days_ago.strftime('%Y-%m-%d')
+
+    url += "&dateFrom=" + ten_string
+    url += "&dateTo=" + current_string
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        datos = response.json()
+        return JsonResponse(datos["matches"], safe=False)
+    else:
+        return JsonResponse({'error': 'No se pudo obtener la información'}, status=500)
+
 
 def MatchUpdate(request, equipo_id):
     pass
