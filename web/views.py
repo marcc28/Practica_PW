@@ -175,8 +175,14 @@ def PlayerUpdate(request, equipo_id):
 
 
 def PlayerDelete(request, equipo_id):
-    pass
-
+    if request.method == "DELETE":
+        try:
+            player = Player.objects.get(id=equipo_id)
+            player.delete()
+        except Player.DoesNotExist:
+            return JsonResponse({'error': 'Player not found'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
 
 def fetch_all_teams():
     headers = {
@@ -200,8 +206,9 @@ def fetch_all_teams():
             'squad': [
                 {
                     'id': jugador.id,
-                    'nombre': jugador.name,
-                    'nacionalidad': jugador.nationality
+                    'name': jugador.name,
+                    'nationality': jugador.nationality
+                    'position': jugador.position
                 } for jugador in equipo.players.all()
             ]
         })
