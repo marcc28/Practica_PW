@@ -8,7 +8,9 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Match, Team, Player
 from .forms import MatchForm, TeamForm, PlayerForm
 import requests
-import  json
+import json
+
+
 # from .models import Book
 
 # Create your views here.
@@ -16,9 +18,11 @@ import  json
 def home(request):
     return render(request, 'home.html')
 
+
 def logout_view(request):
     auth_logout(request)
     return redirect('home')
+
 
 def register(request):
     if request.method == 'POST':
@@ -30,14 +34,18 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
+
 def matchView(request):
     return render(request, 'match.html')
+
 
 def teamView(request):
     return render(request, 'team.html')
 
+
 def playerView(request):
     return render(request, 'player.html')
+
 
 def TeamCreate(request):
     try:
@@ -72,51 +80,12 @@ def TeamCreate(request):
     except json.JSONDecodeError:
         return JsonResponse({'error': 'JSON inválido'}, status=400)
     except Exception as e:
-        print("hay error jente")
         return JsonResponse({'error': str(e)}, status=500)
 
+
 def getTeams(request):
-    headers = {
-        #TODO: modificar token
-        "X-Auth-Token" : "0ba4dbb5a5674096a1ae842cfe22366f"
-    }
-    url = "http://api.football-data.org/v4/competitions/PD/teams"
-    response = requests.get(url, headers=headers)
-
-    equipos = Team.objects.prefetch_related('players').all()
-
-    equipos_serializados = []
-    for equipo in equipos:
-        equipos_serializados.append({
-            'id': equipo.id,
-            'name': equipo.name,
-            'crest': equipo.crest,
-            'founded': equipo.founded,
-            'venue': equipo.venue,
-            "creador_id": equipo.creador_id,
-            'coach': equipo.coach,
-            'jugadores': [
-                {
-                    'id': jugador.id,
-                    'nombre': jugador.name,
-                    'nacionalidad': jugador.nationality
-                } for jugador in equipo.players.all()
-            ]
-        })
-
-    print(equipos_serializados)
-
-    if response.status_code == 200:
-        datos = response.json()
-        # Mezclar datos api amb base de datos
-        datos["teams"].extend(equipos_serializados)
-
-        # Retornar les dades
-        return JsonResponse(datos)
-    else:
-        return JsonResponse({'error': 'No se pudo obtener la información'}, status=500)
-
-
+    equipos = fetch_all_teams()
+    return JsonResponse(equipos, safe=False)
 
 def TeamUpdate(request, equipo_id):
     if request.method == "PUT":
@@ -137,6 +106,7 @@ def TeamUpdate(request, equipo_id):
     else:
         return JsonResponse({'error': 'Método no permitido'}, status=405)
 
+
 def TeamDelete(request, equipo_id):
     if request.method == "DELETE":
         try:
@@ -147,8 +117,10 @@ def TeamDelete(request, equipo_id):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
+
 def MatchCreate(request):
     pass
+
 
 def getMatches(request):
     from datetime import datetime, timedelta
@@ -180,6 +152,7 @@ def getMatches(request):
 def MatchUpdate(request, equipo_id):
     pass
 
+
 def MatchDelete(request, equipo_id):
     pass
 
@@ -188,10 +161,53 @@ def PlayerCreate(request):
     pass
 
 def getPlayers(request):
-    pass
+    players = []
+    teams = fetch_all_teams()
+    for team in  teams:
+        squad = team["squad"]
+        players.extend(squad)
+    # Retornar les dades
+    return JsonResponse(players, safe=False)
+
 
 def PlayerUpdate(request, equipo_id):
     pass
 
+
 def PlayerDelete(request, equipo_id):
     pass
+
+
+def fetch_all_teams():
+    headers = {
+        "X-Auth-Token": "0ba4dbb5a5674096a1ae842cfe22366f"
+    }
+    url = "http://api.football-data.org/v4/competitions/PD/teams"
+    response = requests.get(url, headers=headers)
+
+    equipos = Team.objects.prefetch_related('players').all()
+
+    equipos_serializados = []
+    for equipo in equipos:
+        equipos_serializados.append({
+            'id': equipo.id,
+            'name': equipo.name,
+            'crest': equipo.crest,
+            'founded': equipo.founded,
+            'venue': equipo.venue,
+            "creador_id": equipo.creador_id,
+            'coach': equipo.coach,
+            'squad': [
+                {
+                    'id': jugador.id,
+                    'nombre': jugador.name,
+                    'nacionalidad': jugador.nationality
+                } for jugador in equipo.players.all()
+            ]
+        })
+    equipos_api = []
+    if response.status_code == 200:
+        datos = response.json()
+        equipos_api = datos.get("teams", [])
+
+    return equipos_serializados + equipos_api

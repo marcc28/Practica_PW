@@ -181,7 +181,8 @@ function loadTeams() {
         method: 'GET',
         success: function (response) {
             $('#mensaje-error').hide();
-            equipos = response.teams;
+            equipos = response;
+            console.log(response);
             renderEquipos(equipos)
         },
         error: function (xhr, status, error) {
