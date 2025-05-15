@@ -87,6 +87,7 @@ def getTeams(request):
     equipos = fetch_all_teams()
     return JsonResponse(equipos, safe=False)
 
+
 def TeamUpdate(request, equipo_id):
     if request.method == "PUT":
         try:
@@ -158,12 +159,37 @@ def MatchDelete(request, equipo_id):
 
 
 def PlayerCreate(request):
-    pass
+    try:
+        data = json.loads(request.body)
+        name = data.get('name')
+        nationality = data.get('nationality')
+        position = data.get('position')
+        if not name or not nationality or not position:
+            return JsonResponse({'error': 'missing atributes'}, status=400)
+
+
+        player = Player.objects.create(
+            name=name,
+            nationality=nationality,
+            position=position
+        )
+
+        return JsonResponse({
+            'name': player.name,
+            'nationality': player.nationality,
+            'position': player.position
+        }, status=201)
+
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'inavlid JSON'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
 
 def getPlayers(request):
     players = []
     teams = fetch_all_teams()
-    for team in  teams:
+    for team in teams:
         squad = team["squad"]
         players.extend(squad)
     # Retornar les dades
@@ -183,6 +209,7 @@ def PlayerDelete(request, equipo_id):
             return JsonResponse({'error': 'Player not found'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+
 
 def fetch_all_teams():
     headers = {
@@ -207,7 +234,7 @@ def fetch_all_teams():
                 {
                     'id': jugador.id,
                     'name': jugador.name,
-                    'nationality': jugador.nationality
+                    'nationality': jugador.nationality,
                     'position': jugador.position
                 } for jugador in equipo.players.all()
             ]
