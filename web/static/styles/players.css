@@ -21,9 +21,10 @@
     background: white;
     padding: 20px;
     border-radius: 10px;
-    min-width: 300px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    position: relative;
 }
 
 .error-mensaje {
@@ -31,11 +32,40 @@
     display: none;
 }
 
+.delete-button {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button:hover {
+  background-color: #e60000;
+}
+
+.delete-button svg {
+  width: 24px;
+  height: 24px;
+  fill: white; /* o cambia a #fff si prefieres */
+}
+
+
 /* Botones */
 #btn-crear-jugador,
 #cerrar-modal,
 #cerrar-modal-edit,
 #close-edit-modal,
+#save-edit-changes,
 #cerrar-crear-modal,
 #btn-guardar-jugador,
 #submit {
@@ -131,13 +161,6 @@
     border-radius: 4px;
 }
 
-.modal-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
 .modal-buttons button {
     background-color: #27ae60;
     color: white;
@@ -148,14 +171,12 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .modal-buttons button:hover {
     background-color: #219150;
 }
 
-/* Espaciado en formularios */
-form input,
-form button {
+/* Form layout in modal */
+form input, form button {
     margin-top: 0.5rem;
 }
 
