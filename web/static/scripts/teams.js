@@ -6,7 +6,7 @@ $(document).ready(function () {
         $('#visualize-modal').addClass('hidden');
     });
 
-    $('#close-edit-modal').on('click', () => {
+    $('#cerrar-modal-edit').on('click', () => {
         $('#modal-overlay').addClass('hidden');
         $('#edit-modal').addClass('hidden');
     });
@@ -36,8 +36,10 @@ $(document).ready(function () {
 
         const datosActualizados = {
             name: $('#modal-nombre-input').val(),
+            crest: $('#modal-crest-input').val(),
             founded: $('#modal-fundado-input').val(),
-            venue: $('#modal-estadio-input').val()
+            venue: $('#modal-estadio-input').val(),
+            coach: $('#modal-coach-input').val()
         };
 
         $.ajax({
