@@ -1,0 +1,160 @@
+.hidden {
+    display: none !important;
+}
+
+/* Fondo oscuro del modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* Estilo del modal */
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 300px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.error-mensaje {
+    color: red;
+    display: none;
+}
+
+/* Botones */
+#btn-crear-jugador,
+#cerrar-modal,
+#cerrar-modal-edit,
+#close-edit-modal,
+#cerrar-crear-modal,
+#btn-guardar-jugador,
+#submit {
+    background-color: #27ae60;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 1rem 0;
+    transition: background-color 0.3s ease;
+}
+
+#btn-crear-jugador:hover,
+#cerrar-modal:hover,
+#cerrar-modal-edit:hover,
+#close-edit-modal:hover,
+#cerrar-crear-modal:hover,
+#btn-guardar-jugador:hover,
+#submit:hover {
+    background-color: #219150;
+}
+
+/* Buscador */
+#buscador {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.6rem;
+    margin: 0 auto 2rem auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Tabla de jugadores */
+#tabla-jugadores {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 2rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#tabla-jugadores th,
+#tabla-jugadores td {
+    padding: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+#tabla-jugadores th {
+    background-color: #9dfd6d;
+    color: #133502;
+}
+
+/* Contenedor nombre y escudo juntos */
+.nombre-escudo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Escudos de equipos */
+.escudo-equipo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Modal específico */
+.modal h2 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.modal p {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.modal input {
+    width: 100%;
+    padding: 0.6rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.modal-buttons button {
+    background-color: #27ae60;
+    color: white;
+    flex: 1;
+    margin: 0 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-buttons button:hover {
+    background-color: #219150;
+}
+
+/* Espaciado en formularios */
+form input,
+form button {
+    margin-top: 0.5rem;
+}

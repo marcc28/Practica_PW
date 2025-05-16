@@ -1,4 +1,76 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-    <h1>Player!</h1>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'scripts/player.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'styles/players.css' %}">
+
+    <button id="btn-crear-jugador">Create player</button>
+    <input type="text" id="buscador" placeholder="Search player by name..."/>
+
+    <h1>Players</h1>
+    <table id="tabla-jugadores">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of birth</th>
+            <th>Position</th>
+            <th>Team</th>
+            <th>Nationality</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p id="mensaje-error" style="display: none; color: red;">Error loading data.</p>
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <!-- Modal -->
+        <div id="visualize-modal" class="modal hidden">
+            <h2 id="modal-nombre"></h2>
+            <p><strong>Date of birth:</strong> <span id="modal-edad"></span></p>
+            <p><strong>Position:</strong> <span id="modal-posicion"></span></p>
+            <p><strong>Team:</strong> <span id="modal-equipo"></span></p>
+            <button id="cerrar-modal">Close</button>
+        </div>
+
+        <div id="edit-modal" class="modal hidden">
+            <h1>EDIT</h1>
+            <h2 id="modal-nombre"></h2>
+            <form id="form-editar-jugador">
+                <label>Name:</label>
+                <input type="text" id="modal-nombre-input" name="nombre">
+
+                <label>Date of birth:</label>
+                <input type="number" id="modal-edad-input" name="edad">
+
+                <label>Position:</label>
+                <input type="text" id="modal-posicion-input" name="posicion">
+
+                <label>Team:</label>
+                <input type="text" id="modal-equipo-input" name="equipo">
+
+                <label>Nationality:</label>
+                <input type="text" id="modal-nationality-input" name="nationality">
+
+                <div class="modal-buttons">
+                    <button type="submit">Save changes</button>
+                    <button type="button" id="cerrar-modal">Cancel</button>
+                </div>
+            </form>
+            <button id="close-edit-modal">Close</button>
+        </div>
+
+        <div id="create-modal" class="modal hidden">
+            <h2>Create new player</h2>
+            <form id="form-crear-jugador">
+                <input type="text" name="name" id="create-name" placeholder="Player name" required><br>
+                <input type="date" name="age" id="create-age" placeholder="Date of birth" required><br>
+                <input type="text" name="position" id="create-position" placeholder="Position" required><br>
+                <input type="text" name="team" id="create-team" placeholder="Team" required><br>
+                <input type="text" name="nationality" id="create-nationality" placeholder="Nationality" required>
+                <button type="submit" id="btn-guardar-jugador">Create</button>
+                <button type="button" id="cerrar-crear-modal">Cancel</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
