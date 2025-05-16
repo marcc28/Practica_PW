@@ -190,7 +190,10 @@ def getPlayers(request):
     players = []
     teams = fetch_all_teams()
     for team in teams:
+        teamName = team["name"]
         squad = team["squad"]
+        for player in squad:
+            player["team"] = teamName
         players.extend(squad)
     # Retornar les dades
     return JsonResponse(players, safe=False)
