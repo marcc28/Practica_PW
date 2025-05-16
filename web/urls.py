@@ -20,15 +20,15 @@ urlpatterns = [
     path('team/<int:equipo_id>/delete/', TeamDelete, name='team-delete'),
 
     # match urls
-    path('match/create/', MatchCreate, name='match-create'),
-    path('match/api/match/', views.getMatches, name='getMatch'),
+    path('matches/create/', MatchCreate, name='match-create'),
+    path('matches/api/match/', views.getMatches, name='getMatch'),
 
-    path('match/<int:match_id>/edit', MatchUpdate, name='match-edit'),
-    path('match/<int:match_id>/delete/', MatchDelete, name='match-delete'),
+    path('matches/<int:match_id>/edit', MatchUpdate, name='match-edit'),
+    path('matches/<int:match_id>/delete/', MatchDelete, name='match-delete'),
 
     # players url
-    path('player/create/', PlayerCreate, name='player-create'),
-    path('player/api/players/', views.getPlayers, name='get-players'),
-    path('player/<int:player_id>/edit', PlayerUpdate, name='player-edit'),
-    path('player/<int:player_id>/delete/', PlayerDelete, name='player-delete'),
+    path('players/create/', PlayerCreate, name='player-create'),
+    path('players/api/players/', views.getPlayers, name='get-players'),
+    path('players/<int:player_id>/edit', PlayerUpdate, name='player-edit'),
+    path('players/<int:player_id>/delete/', PlayerDelete, name='player-delete'),
 ]
