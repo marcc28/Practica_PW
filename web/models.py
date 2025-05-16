@@ -5,14 +5,13 @@ from django.db import models
 # Modelo de Player
 class Player(models.Model):
     name = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField()
+    first_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
     nationality = models.CharField(max_length=100)
     position = models.CharField(max_length=50)
-    shirt_number = models.IntegerField()
-    last_updated = models.DateTimeField()
-    current_team = models.ForeignKey('Team', related_name='current_players', on_delete=models.CASCADE, null=True, blank=True)
+    shirt_number = models.IntegerField(null=True, blank=True)
+    current_team = models.ForeignKey('Team', related_name='squad', on_delete=models.CASCADE, null=True, blank=True)
     creador = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
 
     def __str__(self):

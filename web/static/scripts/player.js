@@ -1,5 +1,5 @@
 let jugadores = [];
-
+let playerId = null;
 $(document).ready(function () {
     loadPlayers();
 
@@ -59,7 +59,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#btn-guardar-jugador').on('submit', function (e) {
+    $('#btn-guardar-jugador').on('click', function (e) {
         e.preventDefault();
 
         const form = $('#form-crear-jugador')[0];
@@ -76,14 +76,9 @@ $(document).ready(function () {
             nationality: $('#create-nationality').val()
         };
 
-        console.log(data.name);
-        console.log(data.birth_date);
-        console.log(data.position);
-        console.log(data.team);
-        console.log(data.nationality);
 
         $.ajax({
-            url: '/create/',
+            url: '/players/create/',
             method: 'POST',
             contentType: 'application/json',
             headers: {
@@ -91,10 +86,9 @@ $(document).ready(function () {
             },
             data: JSON.stringify(data),
             success: function () {
-                alert('Jugador creado correctamente');
+                loadPlayers();
                 $('#create-modal').addClass('hidden');
                 $('#modal-overlay').addClass('hidden');
-                loadPlayers();
             },
             error: function () {
                 alert('Error al crear el jugador');
@@ -121,6 +115,7 @@ function renderJugadores(lista) {
         $tr.on('click', function () {
             const userId = document.body.dataset.userId;
             if (jugador.creator_id == userId) {
+                playerId = jugador.id
                 showEditModal(jugador);
             } else {
                 mostrarModal(jugador);

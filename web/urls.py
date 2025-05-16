@@ -21,7 +21,8 @@ urlpatterns = [
 
     # match urls
     path('matches/create/', MatchCreate, name='match-create'),
-    path('matches/api/match/', views.getMatches, name='getMatch'),
+    path('matches/api/match/', views.getMatches, name='getMatches'),
+    path('matches/<int:match_id>/', getMatchById, name='getMatchById'),
 
     path('matches/<int:match_id>/edit', MatchUpdate, name='match-edit'),
     path('matches/<int:match_id>/delete/', MatchDelete, name='match-delete'),

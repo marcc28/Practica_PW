@@ -152,6 +152,18 @@ def getMatches(request):
     else:
         return JsonResponse({'error': 'No se pudo obtener la información'}, status=500)
 
+def getMatchById(request, match_id):
+    headers = {
+        "X-Auth-Token": "0ba4dbb5a5674096a1ae842cfe22366f"
+    }
+    url = "http://api.football-data.org/v4/matches/"
+    url += str(match_id)
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        datos = response.json()
+        return JsonResponse(datos, safe=False)
+    else:
+        return JsonResponse({"mensjae": "error recuperando los datos de la api"}, status=500)
 
 def MatchUpdate(request, equipo_id):
     pass
@@ -169,15 +181,17 @@ def PlayerCreate(request):
         position = data.get('position')
         birth_date = data.get('birth_date')
 
+        print(data)
+
         if not name or not nationality or not position:
             return JsonResponse({'error': 'missing atributes'}, status=400)
-
 
         player = Player.objects.create(
             name=name,
             nationality=nationality,
             position=position,
-            birth_date=birth_date,
+            date_of_birth=birth_date,
+            creador=request.user,
         )
 
         return JsonResponse({
@@ -196,12 +210,14 @@ def getPlayers(request):
     players = []
     teams = fetch_all_teams()
     for team in teams:
-        teamName = team["name"]
-        crest = team["crest"]
         squad = team["squad"]
-        for player in squad:
-            player["team"] = teamName
-            player["crest"] = crest
+
+        if("creador" not in team):
+            teamName = team["name"]
+            crest = team["crest"]
+            for player in squad:
+                player["team"] = teamName
+                player["crest"] = crest
         players.extend(squad)
     # Retornar les dades
     return JsonResponse(players, safe=False)
@@ -243,10 +259,11 @@ def fetch_all_teams():
     url = "http://api.football-data.org/v4/competitions/PD/teams"
     response = requests.get(url, headers=headers)
 
-    equipos = Team.objects.prefetch_related('players').all()
+    equipos = Team.objects.prefetch_related('squad').all()
 
     equipos_serializados = []
     for equipo in equipos:
+
         equipos_serializados.append({
             'id': equipo.id,
             'name': equipo.name,
@@ -260,8 +277,9 @@ def fetch_all_teams():
                     'id': jugador.id,
                     'name': jugador.name,
                     'nationality': jugador.nationality,
-                    'position': jugador.position
-                } for jugador in equipo.players.all()
+                    'position': jugador.position,
+                    'birth_date': jugador.date_of_birth,
+                } for jugador in equipo.squad.all()
             ]
         })
     equipos_api = []
