@@ -1,5 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'scripts/matches.js' %}"></script>
+
     <h1>MATCH!</h1>
-      
+    <table id="tabla-matches">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Equipo Local</th>
+                <th>Resultado</th>
+                <th>Equipo Visitante</th>
+                <th>Competición</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p id="mensaje-error" style="display: none; color: red;">Error al cargar los datos de los partidos.</p>
 {% endblock %}
