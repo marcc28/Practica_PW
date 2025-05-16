@@ -40,7 +40,7 @@
                 <input type="text" id="modal-nombre-input" name="nombre">
 
                 <label>Date of birth:</label>
-                <input type="number" id="modal-edad-input" name="edad">
+                <input type="date" id="modal-edad-input" name="edad">
 
                 <label>Position:</label>
                 <input type="text" id="modal-posicion-input" name="posicion">
@@ -65,8 +65,8 @@
                 <input type="text" name="name" id="create-name" placeholder="Player name" required><br>
                 <input type="date" name="age" id="create-age" placeholder="Date of birth" required><br>
                 <input type="text" name="position" id="create-position" placeholder="Position" required><br>
-                <label for="team">Current team</label>
                 <select name="team" id="create-team">
+                    <option value="" disabled selected hidden>Select current team</option>
                     {% for team in teams %}
                         <option value="{{ team.id }}">{{ team.name }}</option>
                     {% endfor %}
