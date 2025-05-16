@@ -1,4 +1,5 @@
 let equipos = [];
+let teamId = null;
 $(document).ready(function () {
     loadTeams();
     $('#cerrar-modal').on('click', () => {
@@ -6,7 +7,7 @@ $(document).ready(function () {
         $('#visualize-modal').addClass('hidden');
     });
 
-    $('#close-edit-modal').on('click', () => {
+    $('#cerrar-modal-edit').on('click', () => {
         $('#modal-overlay').addClass('hidden');
         $('#edit-modal').addClass('hidden');
     });
@@ -23,6 +24,26 @@ $(document).ready(function () {
         $('#modal-overlay').addClass('hidden');
     });
 
+    $('#btn-delete-team').on('click', function (e){
+        e.preventDefault()
+        $.ajax({
+            url: `/team/${teamId}/delete/`,
+            method: 'DELETE',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            success: function () {
+                loadTeams()
+                $('#modal-overlay').addClass('hidden');
+                $('#edit-modal').addClass('hidden');
+            },
+            error: function () {
+                alert('Error al eliminar equipo');
+            }
+        });
+    })
+
     $('#buscador').on('input', function () {
         const texto = $(this).val().toLowerCase();
         const filtrados = equipos.filter(eq => eq.name.toLowerCase().includes(texto));
@@ -36,8 +57,10 @@ $(document).ready(function () {
 
         const datosActualizados = {
             name: $('#modal-nombre-input').val(),
+            crest: $('#modal-crest-input').val(),
             founded: $('#modal-fundado-input').val(),
-            venue: $('#modal-estadio-input').val()
+            venue: $('#modal-estadio-input').val(),
+            coach: $('#modal-coach-input').val()
         };
 
         $.ajax({
@@ -95,7 +118,8 @@ $(document).ready(function () {
                 coach: entrenador
             }),
             success: function (data) {
-                alert('Equipo creado correctamente');
+                loadTeams()
+                $('#modal-overlay').addClass('hidden');
                 $('#modal-crear-equipo').addClass('hidden');
             },
             error: function (xhr, status, error) {
@@ -115,8 +139,9 @@ function renderEquipos(lista) {
                         <td>${equipo.name}</td>
                         <td>${equipo.founded}</td>
                         <td>${equipo.venue}</td>
-                        <td>${equipo.coach?.name || 'Desconocido'}</td>
+                        <td>${equipo.coach?.name || equipo.coach || 'Desconocido'}</td>
         </tr>`);
+        console.log(equipo.coach);
         $tr.on('click', function () {
 
             // Marca como seleccionado el actual
@@ -127,6 +152,7 @@ function renderEquipos(lista) {
             console.log(equipo);
 
             if (equipo["creador_id"] == userId) {
+                teamId = equipo.id;
                 showEditModal(equipo);
             } else {
                 mostrarModal(equipo);
@@ -145,6 +171,14 @@ function mostrarModal(equipo) {
     $('#modal-nombre').text(equipo.name || "Desconocido");
     $('#modal-fundado').text(equipo.founded || 'Desconocido');
     $('#modal-estadio').text(equipo.venue || 'Desconocido');
+    $('#modal-entrenador').text(equipo.coach?.name || 'Desconocido');
+    $('#modal-tla').text(equipo.tla || 'Desconocido');
+    $('#modal-web').attr('href', equipo.website || 'Desconocido');
+    $('#modal-web').text(equipo.website || 'Desconocido');
+
+
+
+
     $('#modal-overlay').removeClass('hidden')
     $('#visualize-modal').removeClass('hidden')
 }
@@ -153,6 +187,8 @@ function showEditModal(equipo) {
     $('#modal-nombre-input').val(equipo.name || "");
     $('#modal-fundado-input').val(equipo.founded || "");
     $('#modal-estadio-input').val(equipo.venue || "");
+    $('#modal-crest-input').val(equipo.crest || "");
+    $('#modal-coach-input').val(equipo.coach || "");
 
     // Guardar ID del equipo actual para usarlo luego al guardar
     $('#form-editar-equipo').data('equipo-id', equipo.id);
