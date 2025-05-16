@@ -7,7 +7,6 @@
 
     <button id="btn-crear-jugador">Create player</button>
     <input type="text" id="buscador" placeholder="Search player by name..."/>
-
     <h1>Players</h1>
     <table id="tabla-jugadores">
         <thead>
@@ -66,7 +65,12 @@
                 <input type="text" name="name" id="create-name" placeholder="Player name" required><br>
                 <input type="date" name="age" id="create-age" placeholder="Date of birth" required><br>
                 <input type="text" name="position" id="create-position" placeholder="Position" required><br>
-                <input type="text" name="team" id="create-team" placeholder="Team" required><br>
+                <label for="team">Current team</label>
+                <select name="team" id="create-team">
+                    {% for team in teams %}
+                        <option value="{{ team.id }}">{{ team.name }}</option>
+                    {% endfor %}
+                </select>
                 <input type="text" name="nationality" id="create-nationality" placeholder="Nationality" required>
                 <button type="submit" id="btn-guardar-jugador">Create</button>
                 <button type="button" id="cerrar-crear-modal">Cancel</button>

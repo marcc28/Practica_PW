@@ -76,6 +76,8 @@ $(document).ready(function () {
             nationality: $('#create-nationality').val()
         };
 
+        console.log(data)
+
 
         $.ajax({
             url: '/players/create/',

@@ -44,7 +44,8 @@ def teamView(request):
 
 
 def playerView(request):
-    return render(request, 'player.html')
+    teams = Team.objects.all()
+    return render(request, 'player.html', {'teams': teams})
 
 
 def TeamCreate(request):
@@ -152,6 +153,7 @@ def getMatches(request):
     else:
         return JsonResponse({'error': 'No se pudo obtener la información'}, status=500)
 
+
 def getMatchById(request, match_id):
     headers = {
         "X-Auth-Token": "0ba4dbb5a5674096a1ae842cfe22366f"
@@ -164,6 +166,7 @@ def getMatchById(request, match_id):
         return JsonResponse(datos, safe=False)
     else:
         return JsonResponse({"mensjae": "error recuperando los datos de la api"}, status=500)
+
 
 def MatchUpdate(request, equipo_id):
     pass
@@ -180,17 +183,19 @@ def PlayerCreate(request):
         nationality = data.get('nationality')
         position = data.get('position')
         birth_date = data.get('birth_date')
+        team_id = data.get('team')
 
-        print(data)
-
-        if not name or not nationality or not position:
+        if not name or not nationality or not position or not birth_date or not team_id:
             return JsonResponse({'error': 'missing atributes'}, status=400)
+
+        team = Team.objects.get(id=int(team_id))
 
         player = Player.objects.create(
             name=name,
             nationality=nationality,
             position=position,
             date_of_birth=birth_date,
+            current_team=team,
             creador=request.user,
         )
 
@@ -202,6 +207,9 @@ def PlayerCreate(request):
 
     except json.JSONDecodeError:
         return JsonResponse({'error': 'inavlid JSON'}, status=400)
+    except Team.DoesNotExist:
+        print("team does not exist")
+        return JsonResponse({'error': 'Invalid team'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
@@ -212,7 +220,7 @@ def getPlayers(request):
     for team in teams:
         squad = team["squad"]
 
-        if("creador" not in team):
+        if ("creador" not in team):
             teamName = team["name"]
             crest = team["crest"]
             for player in squad:
@@ -263,7 +271,6 @@ def fetch_all_teams():
 
     equipos_serializados = []
     for equipo in equipos:
-
         equipos_serializados.append({
             'id': equipo.id,
             'name': equipo.name,

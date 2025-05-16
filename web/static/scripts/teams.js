@@ -119,7 +119,7 @@ $(document).ready(function () {
             success: function (data) {
                 loadTeams()
                 $('#modal-overlay').addClass('hidden');
-                $('#modal-crear-equipo').addClass('hidden');
+                $('#create-modal').addClass('hidden');
             },
             error: function (xhr, status, error) {
                 console.error('Error al crear equipo:', error);
