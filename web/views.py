@@ -167,6 +167,8 @@ def PlayerCreate(request):
         name = data.get('name')
         nationality = data.get('nationality')
         position = data.get('position')
+        birth_date = data.get('birth_date')
+
         if not name or not nationality or not position:
             return JsonResponse({'error': 'missing atributes'}, status=400)
 
@@ -174,7 +176,8 @@ def PlayerCreate(request):
         player = Player.objects.create(
             name=name,
             nationality=nationality,
-            position=position
+            position=position,
+            birth_date=birth_date,
         )
 
         return JsonResponse({
