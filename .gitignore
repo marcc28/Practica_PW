@@ -14,9 +14,6 @@ ENV/
 *.env
 .env.*
 
-# Archivos de bases de datos
-*.sqlite3
-
 # Archivos de logs
 *.log
 

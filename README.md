@@ -30,12 +30,20 @@ Desenvolupar una aplicació funcional que permeti consultar dades del món del f
 
 ---
 
-## ☝️ Consideracions de disseny
+## ☝️ Consideracions de disseny (deliverable 1)
 - `Simplicitat i claredat`: Hem optat per un disseny simple, clar i intuïtiu per fer la nostra pàgina web accessible a tots els usuaris.
 - `Visuals`: Per una major claredaten el procès tant de registre com de login s'ha implementat un format independent a ```base.html```, utilitzant també un static diferent
 - `Reducció de models`: S'ha pres la decisió unanimament d'eliminar el model **Season** especificat en el plantejament de la web, ja que coonsiderem que sería més convenient aplicar-ho com a filtre de búsqueda
 - `Imatges`: En quant a imatges s'ha utilitzat un logotip i una imatge per cautivar l'atenció del públic, totes dues generades per intel·ligència artificial amb un toc personal dels memebres del grup
 - `Patró`: Aprofitant els exemples vists a classe i explicats pel professor, s'han agafat idees i estructures per una millor estructura del projecte
+
+## ☝️ Consideracions de disseny (deliverable 2)
+- `Consistència`: Totes les vistes de creació, edició i eliminació s'han desenvolupat amb **Class-Based Views (CBV)** i **ModelForms**, garantint una estructura coherent i mantenible, aixi com un artibut creador per comprovar la creació, edició i eliminació.
+- `API externa`: S'ha integrat una API externa per facilitar l'entrada de dades en formularis, millorant així la usabilitat. Aquesta funcionalitat s'ha implementat amb **AJAX i jQuery** per carregar dades de forma dinàmica.
+- `Escalabilitat`: El projecte està dissenyat perquè sigui fàcilment ampliable en futures versions, tant pel que fa a models com a funcionalitats addicionals.
+- `Accessibilitat`: L'estructura visual i la navegació han estat simplificades per garantir una experiència d'usuari fluida i entenedora.
+
+
 
 ---
 
@@ -66,7 +74,25 @@ Un cop creat, es pot entrar en mode administrador registrant-se amb l'usuari cre
 
 ---
 
-## 👤 Desenvolupadors
+## 🧑‍💼 Superusuario
+
+- **Usuario:** `prova`  
+- **Contraseña:** `prova1234`  
+- **📌 Nota:** No se han añadido equipos ni jugadores con este usuario.
+
+---
+
+
+## 👤 Usuario: `marc`
+
+- **Contraseña:** `Marcc_28`  
+- **Contenido Asociado:**
+  - 🏟️ **Equipo:** *Lleida FC*
+  - 🧍‍♂️ **Jugador:** *Vicent Ripoll*
+
+---
+
+## 👥 Desenvolupadors
 
 - **Marc Companys Gasulla:** 53398418 P
 - **Eloi Delfí Cristòfol Pardo:** 48054169 Q
