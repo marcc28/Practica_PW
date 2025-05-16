@@ -20,7 +20,6 @@ function renderizarPartidos(partidos) {
     const $tabla = $('#tabla-matches tbody');
     $tabla.empty();
 
-    // Ordenar partidos por fecha descendente (más reciente primero)
     partidos.sort((a, b) => new Date(b.utcDate) - new Date(a.utcDate));
 
     partidos.forEach(partido => {
@@ -33,7 +32,7 @@ function renderizarPartidos(partidos) {
         const escudoVisitante = partido.awayTeam.crest;
 
         const $fila = $(`
-            <tr>
+            <tr style="cursor:pointer;">
                 <td>${fecha}</td>
                 <td class="nombre-escudo"><span>${equipoLocal}</span><img src="${escudoLocal}" alt="Escudo ${equipoLocal}"></td>
                 <td>${resultado}</td>
@@ -42,8 +41,42 @@ function renderizarPartidos(partidos) {
             </tr>
         `);
 
+        // Evento click para mostrar popup
+        $fila.on('click', function () {
+            const detalleHtml = `
+                <div class="popup-header">
+                    <div class="competicion">${competicion}</div>
+                    <div class="fecha">${fecha}</div>
+                </div>
+                <div class="popup-marcador">
+                    <div class="equipo local">
+                        <img src="${escudoLocal}" alt="Escudo ${equipoLocal}">
+                        <div class="nombre">${equipoLocal}</div>
+                    </div>
+                    <div class="resultado">${resultado}</div>
+                    <div class="equipo visitante">
+                        <img src="${escudoVisitante}" alt="Escudo ${equipoVisitante}">
+                        <div class="nombre">${equipoVisitante}</div>
+                    </div>
+                </div>
+            `;
+
+            $('#contenido-partido').html(detalleHtml);
+            $('#popup-partido').fadeIn();
+        });
+
         $tabla.append($fila);
     });
+
+    // Cerrar popup al clicar en la X
+    $('#cerrar-popup').on('click', function () {
+        $('#popup-partido').fadeOut();
+    });
+
+    // También cerrar popup si se hace click fuera del contenido
+    $('#popup-partido').on('click', function (e) {
+        if (e.target === this) {
+            $(this).fadeOut();
+        }
+    });
 }
-
-

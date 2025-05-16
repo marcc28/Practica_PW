@@ -8,15 +8,22 @@
     <h1>Recent matches</h1>
     <table id="tabla-matches">
         <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Equipo Local</th>
-                <th>Resultado</th>
-                <th>Equipo Visitante</th>
-                <th>Competición</th>
-            </tr>
+        <tr>
+            <th>Date</th>
+            <th>Home team</th>
+            <th>Result</th>
+            <th>Away team</th>
+            <th>Competition</th>
+        </tr>
         </thead>
         <tbody></tbody>
     </table>
+    <div id="popup-partido" class="popup-modal" style="display:none;">
+        <div class="popup-contenido">
+            <span id="cerrar-popup" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
+            <div id="contenido-partido"></div>
+        </div>
+    </div>
+
     <p id="mensaje-error" style="display: none; color: red;">Error al cargar los datos de los partidos.</p>
 {% endblock %}
