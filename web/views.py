@@ -194,9 +194,11 @@ def getPlayers(request):
     teams = fetch_all_teams()
     for team in teams:
         teamName = team["name"]
+        crest = team["crest"]
         squad = team["squad"]
         for player in squad:
             player["team"] = teamName
+            player["crest"] = crest
         players.extend(squad)
     # Retornar les dades
     return JsonResponse(players, safe=False)
