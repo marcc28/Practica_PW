@@ -101,7 +101,6 @@ $(document).ready(function () {
         const estadio = $('#create-venue').val();
         const entrenador = $('#create-coach').val();
 
-        console.log(nombre, crest, fundado, estadio, entrenador);
 
         $.ajax({
             url: '/team/create/',  // Aquí va el POST
@@ -141,7 +140,6 @@ function renderEquipos(lista) {
                         <td>${equipo.venue}</td>
                         <td>${equipo.coach?.name || equipo.coach || 'Desconocido'}</td>
         </tr>`);
-        console.log(equipo.coach);
         $tr.on('click', function () {
 
             // Marca como seleccionado el actual
@@ -166,8 +164,6 @@ function renderEquipos(lista) {
 function mostrarModal(equipo) {
     const userId = document.body.dataset.userId;
     // O si usaste window.USER_ID
-    console.log("ID del usuario:", userId);
-
     $('#modal-nombre').text(equipo.name || "Desconocido");
     $('#modal-fundado').text(equipo.founded || 'Desconocido');
     $('#modal-estadio').text(equipo.venue || 'Desconocido');
@@ -218,7 +214,6 @@ function loadTeams() {
         success: function (response) {
             $('#mensaje-error').hide();
             equipos = response;
-            console.log(response);
             renderEquipos(equipos)
         },
         error: function (xhr, status, error) {
