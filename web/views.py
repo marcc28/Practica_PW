@@ -97,6 +97,8 @@ def TeamUpdate(request, equipo_id):
             equipo.name = data.get('name', equipo.name)
             equipo.founded = data.get('founded', equipo.founded)
             equipo.venue = data.get('venue', equipo.venue)
+            equipo.coach = data.get('coach', equipo.coach)
+            equipo.crest = data.get('crest', equipo.crest)
             equipo.save()
 
             return JsonResponse({'mensaje': 'Equipo actualizado con éxito'})
