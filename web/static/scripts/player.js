@@ -28,37 +28,6 @@ $(document).ready(function () {
         const filtrados = jugadores.filter(j => j.name.toLowerCase().includes(texto));
         renderJugadores(filtrados);
     });
-
-    $('#form-editar-jugador').on('submit', function (e) {
-        e.preventDefault();
-        const jugadorId = $(this).data('jugador-id');
-
-        const datosActualizados = {
-            name: $('#modal-nombre-input').val(),
-            birth_date: $('#modal-edad-input').val(),
-            position: $('#modal-posicion-input').val(),
-            team: $('#modal-equipo-input').val()
-        };
-
-        $.ajax({
-            url: `/player/${jugadorId}/edit`,
-            method: 'PUT',
-            contentType: 'application/json',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            data: JSON.stringify(datosActualizados),
-            success: function () {
-                loadPlayers();
-                $('#modal-overlay').addClass('hidden');
-                $('#edit-modal').addClass('hidden');
-            },
-            error: function () {
-                alert('Error al actualizar jugador');
-            }
-        });
-    });
-
     $('#btn-guardar-jugador').on('click', function (e) {
         e.preventDefault();
 
@@ -75,8 +44,6 @@ $(document).ready(function () {
             team: $('#create-team').val(),
             nationality: $('#create-nationality').val()
         };
-
-        console.log(data)
 
 
         $.ajax({
@@ -97,7 +64,41 @@ $(document).ready(function () {
             }
         });
     });
-    $('#btn-delete-player').on('click', function (e){
+
+    $('#form-editar-jugador').on('submit', function (e) {
+        e.preventDefault();
+
+        const datosActualizados = {
+            name: $('#modal-nombre-input').val(),
+            birth_date: $('#modal-edad-input').val(),
+            position: $('#modal-posicion-input').val(),
+            team: $('#edit-team').val(),
+            nationality: $('#modal-nationality-input').val()
+        };
+
+
+        $.ajax({
+            url: `/players/${playerId}/edit`,
+            method: 'PUT',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            data: JSON.stringify(datosActualizados),
+            success: function () {
+                loadPlayers();
+                $('#buscador').val("");
+                $('#modal-overlay').addClass('hidden');
+                $('#edit-modal').addClass('hidden');
+            },
+            error: function () {
+                alert('Error al actualizar jugador');
+            }
+        });
+    });
+
+
+    $('#btn-delete-player').on('click', function (e) {
         e.preventDefault()
         $.ajax({
             url: `/players/${playerId}/delete/`,
@@ -108,6 +109,7 @@ $(document).ready(function () {
             },
             success: function () {
                 loadPlayers();
+                $('#buscador').val("");
                 $('#modal-overlay').addClass('hidden');
                 $('#edit-modal').addClass('hidden');
             },
@@ -164,8 +166,11 @@ function showEditModal(jugador) {
     $('#modal-nombre-input').val(jugador.name || "");
     $('#modal-edad-input').val(birthDate);
     $('#modal-posicion-input').val(jugador.position || "");
-    $('#modal-equipo-input').val(jugador.team || "");
     $('#modal-nationality-input').val(jugador.nationality || "");
+
+    //replace first with the second
+    $('#modal-equipo-input').val(jugador.team || "");
+    $('#edit-team').val(jugador.team_id || "")
 
     $('#form-editar-jugador').data('jugador-id', jugador.id);
     $('#modal-overlay').removeClass('hidden');
@@ -193,7 +198,6 @@ function loadPlayers() {
         method: 'GET',
         success: function (response) {
             $('#mensaje-error').hide();
-            console.log(response);
 
             jugadores = response.map(j => ({
                 ...j,

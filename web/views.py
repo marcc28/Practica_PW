@@ -231,27 +231,37 @@ def getPlayers(request):
     return JsonResponse(players, safe=False)
 
 
-def PlayerUpdate(request, equipo_id):
+def PlayerUpdate(request, player_id):
     if request.method == "PUT":
         try:
             data = json.loads(request.body)
-            player = Player.objects.get(id=equipo_id)
+            print(data, player_id)
+            player = Player.objects.get(id=player_id)
             player.name = data.get('name', player.name)
             player.nationality = data.get('nationality', player.nationality)
             player.position = data.get('position', player.position)
+            player.date_of_birth = data.get('birth_date', player.date_of_birth)
+            team_id = data.get('team')
+
+            if team_id:
+                team = Team.objects.get(id=int(team_id))
+                player.current_team = team
+
             player.save()
 
-            return JsonResponse({"mensaje": "Player updated"})
+            return JsonResponse({"mensaje": "Player updated"}, status=201)
         except Player.DoesNotExist:
+            return JsonResponse({'error': 'Player no encontrado'}, status=404)
+        except Team.DoesNotExist:
             return JsonResponse({'error': 'Equipo no encontrado'}, status=404)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
 
-def PlayerDelete(request, equipo_id):
+def PlayerDelete(request, player_id):
     if request.method == "DELETE":
         try:
-            player = Player.objects.get(id=equipo_id)
+            player = Player.objects.get(id=player_id)
             player.delete()
             return JsonResponse({"mensaje": "Player eliminado"}, status=201)
         except Player.DoesNotExist:
@@ -286,7 +296,8 @@ def fetch_all_teams():
                     'nationality': jugador.nationality,
                     'position': jugador.position,
                     'birth_date': jugador.date_of_birth,
-                    'creator_id': jugador.creador.id
+                    'creator_id': jugador.creador.id,
+                    "team_id": jugador.current_team.id
                 } for jugador in equipo.squad.all()
             ]
         })
