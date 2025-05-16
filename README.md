@@ -38,12 +38,10 @@ Desenvolupar una aplicació funcional que permeti consultar dades del món del f
 - `Patró`: Aprofitant els exemples vists a classe i explicats pel professor, s'han agafat idees i estructures per una millor estructura del projecte
 
 ## ☝️ Consideracions de disseny (deliverable 2)
-- `Consistència`: Totes les vistes de creació, edició i eliminació s'han desenvolupat amb **Class-Based Views (CBV)** i **ModelForms**, garantint una estructura coherent i mantenible, aixi com un artibut creador per comprovar la creació, edició i eliminació.
+- `Consistència`: Totes les vistes de creació, edició i eliminació s'han desenvolupat per garantint una estructura coherent i mantenible, aixi com l'addició d'un artibut creador per verificar que només pugui editar/eliminar els creats per ell mateix.
 - `API externa`: S'ha integrat una API externa per facilitar l'entrada de dades en formularis, millorant així la usabilitat. Aquesta funcionalitat s'ha implementat amb **AJAX i jQuery** per carregar dades de forma dinàmica.
 - `Escalabilitat`: El projecte està dissenyat perquè sigui fàcilment ampliable en futures versions, tant pel que fa a models com a funcionalitats addicionals.
 - `Accessibilitat`: L'estructura visual i la navegació han estat simplificades per garantir una experiència d'usuari fluida i entenedora.
-
-
 
 ---
 
@@ -76,18 +74,18 @@ Un cop creat, es pot entrar en mode administrador registrant-se amb l'usuari cre
 
 ## 🧑‍💼 Superusuario
 
-- **Usuario:** `prova`  
-- **Contraseña:** `prova1234`  
-- **📌 Nota:** No se han añadido equipos ni jugadores con este usuario.
+- **Usuari:** `prova`  
+- **Contrasenya:** `prova1234`  
+- **📌 Nota:** No s'han afegit equips ni jugadors amb aquest usuari.
 
 ---
 
 
 ## 👤 Usuario: `marc`
 
-- **Contraseña:** `Marcc_28`  
-- **Contenido Asociado:**
-  - 🏟️ **Equipo:** *Lleida FC*
+- **Contrasenya:** `Marcc_28`  
+- **Contingut Associat:**
+  - 🏟️ **Equip:** *Lleida FC*
   - 🧍‍♂️ **Jugador:** *Vicent Ripoll*
 
 ---
