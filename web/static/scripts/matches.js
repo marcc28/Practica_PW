@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 function cargarPartidos() {
     $.ajax({
-        url: 'api/matches/',  // Asegúrate de que esta URL coincide con tu ruta Django
+        url: 'api/match/',  // Asegúrate de que esta URL coincide con tu ruta Django
         method: 'GET',
         success: function (partidos) {
             $('#mensaje-error').hide();
