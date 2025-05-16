@@ -1,0 +1,108 @@
+/* Contenedor de la tabla */
+#tabla-matches {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    table-layout: fixed;  /* Fija ancho de columnas para evitar descuadres */
+}
+
+/* Cabecera */
+#tabla-matches thead th {
+    background-color: #9dfd6d;
+    color: #133502;
+    padding: 1rem 0.8rem;
+    text-align: center;  /* Centrado cabecera */
+    font-weight: 600;
+}
+
+/* Fija ancho columnas de equipos local y visitante */
+#tabla-matches thead th:nth-child(2),
+#tabla-matches tbody td:nth-child(2),
+#tabla-matches thead th:nth-child(4),
+#tabla-matches tbody td:nth-child(4) {
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Celdas */
+#tabla-matches tbody td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+    font-size: 0.95rem;
+    color: #333;
+    text-align: center;  /* Centrado contenido en celdas */
+}
+
+/* Última fila sin borde */
+#tabla-matches tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Imagen de escudo */
+#tabla-matches tbody td img {
+    height: 28px;
+    width: 28px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin: 0 0.4rem;
+    border-radius: 4px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+/* Para que nombre y escudo estén juntos (local: nombre antes, escudo después) */
+#tabla-matches tbody td:nth-child(2) .nombre-escudo {
+    display: inline-flex; /* inline para que el texto se centre con el contenido */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Nombre en local con margen a la derecha */
+#tabla-matches tbody td:nth-child(2) .nombre-escudo span {
+    margin-right: 6px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Para equipo visitante: escudo + nombre con flex row-reverse */
+#tabla-matches tbody td:nth-child(4) .nombre-escudo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+/* Nombre en visitante con margen a la izquierda */
+#tabla-matches tbody td:nth-child(4) .nombre-escudo span {
+    margin-left: 6px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Mensaje error */
+#mensaje-error {
+    margin-top: 1rem;
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+/* Fecha con color más suave */
+#tabla-matches tbody td:first-child {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Resultado centrado y con peso */
+#tabla-matches tbody td:nth-child(3) {
+    font-weight: 700;
+    color: #27ae60;
+    font-size: 1.05rem;
+}
