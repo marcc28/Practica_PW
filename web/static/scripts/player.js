@@ -97,6 +97,25 @@ $(document).ready(function () {
             }
         });
     });
+    $('#btn-delete-player').on('click', function (e){
+        e.preventDefault()
+        $.ajax({
+            url: `/players/${playerId}/delete/`,
+            method: 'DELETE',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            success: function () {
+                loadPlayers();
+                $('#modal-overlay').addClass('hidden');
+                $('#edit-modal').addClass('hidden');
+            },
+            error: function () {
+                alert('Error al eliminar player');
+            }
+        });
+    })
 });
 
 function renderJugadores(lista) {
@@ -146,6 +165,7 @@ function showEditModal(jugador) {
     $('#modal-edad-input').val(birthDate);
     $('#modal-posicion-input').val(jugador.position || "");
     $('#modal-equipo-input').val(jugador.team || "");
+    $('#modal-nationality-input').val(jugador.nationality || "");
 
     $('#form-editar-jugador').data('jugador-id', jugador.id);
     $('#modal-overlay').removeClass('hidden');

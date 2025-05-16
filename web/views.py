@@ -286,6 +286,7 @@ def fetch_all_teams():
                     'nationality': jugador.nationality,
                     'position': jugador.position,
                     'birth_date': jugador.date_of_birth,
+                    'creator_id': jugador.creador.id
                 } for jugador in equipo.squad.all()
             ]
         })
