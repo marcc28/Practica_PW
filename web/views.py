@@ -113,6 +113,7 @@ def TeamDelete(request, equipo_id):
         try:
             equipo = Team.objects.get(id=equipo_id)
             equipo.delete()
+            return JsonResponse({"mensaje": "Equipo eliminado"}, status=201)
         except Team.DoesNotExist:
             return JsonResponse({'error': 'Equipo no encontrado'}, status=404)
         except Exception as e:
@@ -221,6 +222,7 @@ def PlayerDelete(request, equipo_id):
         try:
             player = Player.objects.get(id=equipo_id)
             player.delete()
+            return JsonResponse({"mensaje": "Player eliminado"}, status=201)
         except Player.DoesNotExist:
             return JsonResponse({'error': 'Player not found'}, status=404)
         except Exception as e:
