@@ -18,7 +18,7 @@ urlpatterns = [
     path('teams/api/teams/', views.getTeams, name='getTeams'),
     path('team/<int:equipo_id>/edit', TeamUpdate, name='team-edit'),
     path('team/<int:equipo_id>/delete/', TeamDelete, name='team-delete'),
-    path('team/<int:pk>/', views.team_detail_page, name='team_detail'),
+    path('teams/<int:pk>/', views.team_detail_page, name='team_detail'),
 
 
     # match urls

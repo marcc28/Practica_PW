@@ -119,7 +119,7 @@ function renderEquipos(lista) {
             <td>${equipo.venue}</td>
             <td>${equipo.coach?.name || equipo.coach || 'Desconocido'}</td>
             <td>
-                <a href="/team/${equipo.id}/" title="View details">
+                <a href="/teams/${equipo.id}/" title="View details">
                     More
                 </a>
             </td>
