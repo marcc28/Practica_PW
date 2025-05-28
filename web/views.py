@@ -16,7 +16,30 @@ import json
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    headers = {
+        "X-Auth-Token": "0ba4dbb5a5674096a1ae842cfe22366f"
+    }
+
+    standings_url = "https://api.football-data.org/v4/competitions/PD/standings"
+    scorers_url = "https://api.football-data.org/v4/competitions/PD/scorers"
+
+    standings = []
+    scorers = []
+
+    try:
+        res_standings = requests.get(standings_url, headers=headers)
+        res_scorers = requests.get(scorers_url, headers=headers)
+        if res_standings.status_code == 200:
+            standings = res_standings.json()["standings"][0]["table"]
+        if res_scorers.status_code == 200:
+            scorers = res_scorers.json()["scorers"]
+    except Exception as e:
+        print("Error calling API:", e)
+
+    return render(request, "home.html", {
+        "standings": standings,
+        "scorers": scorers
+    })
 
 
 def logout_view(request):
