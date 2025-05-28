@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'styles/team_detail.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'scripts/team_detail.js' %}"></script>
+
+    <div vocab="https://schema.org/" typeof="SportsTeam">
+        <section class="team-header">
+            <img src="{{ team.crest }}" alt="Crest of {{ team.name }}" property="logo" class="crest"/>
+            <h1 property="name">{{ team.name }}</h1>
+        </section>
+
+        <section class="info-basic">
+            <p><strong>Country:</strong>
+                <span property="location" typeof="Place">
+                    <span property="address" typeof="PostalAddress">
+                        <span property="addressCountry">{{ team.area.name }}</span>
+                    </span>
+                    <img src="{{ team.area.flag }}" alt="Flag of {{ team.area.name }}" class="flag"/>
+                </span>
+            </p>
+            <p><strong>Address:</strong> <span property="address">{{ team.address }}</span></p>
+            <p><strong>Official website:</strong>
+                <a href="{{ team.website }}" target="_blank"
+                   class="website">{{ team.website }}</a>
+            </p>
+            <p><strong>Founded:</strong>
+                <time property="foundingDate" datetime="{{ team.founded }}"
+                      content="{{ team.founded }}">{{ team.founded }}</time>
+            </p>
+            <p><strong>Colors: </strong>{{ team.clubColors }}</p>
+            <p><strong>Stadium:</strong>{{ team.venue }}</p>
+        </section>
+
+        <section class="competitions" property="memberOf" typeof="SportsOrganization">
+            <h2>Current Competitions</h2>
+            <div class="competitions-list">
+                {% for comp in team.runningCompetitions %}
+                    <div class="competition" title="{{ comp.name }}" typeof="SportsOrganization">
+                        <img src="{{ comp.emblem }}" alt="{{ comp.name }}" property="logo"/>
+                        <p property="name">{{ comp.name }}</p>
+                    </div>
+                {% empty %}
+                    <p>No registered competitions.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="coach" rel="coach" typeof="Person">
+            <h2>Coach</h2>
+            <p><strong>Name:</strong> <span property="name">{{ team.coach.name }}</span></p>
+            <p><strong>Date of birth:</strong>
+                <time property="birthDate" datetime="{{ team.coach.dateOfBirth }}"
+                      content="{{ team.coach.dateOfBirth }}">{{ team.coach.dateOfBirth }}</time>
+            </p>
+            <p><strong>Nationality:</strong> <span property="nationality">{{ team.coach.nationality }}</span></p>
+            <p><strong>Contract:</strong>
+                <time content="{{ team.coach.contract.start }}">{{ team.coach.contract.start }}</time>
+                -
+                <time content="{{ team.coach.contract.until }}">{{ team.coach.contract.until }}</time>
+            </p>
+        </section>
+
+        <section class="squad">
+            <h2>Squad</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Date of birth</th>
+                    <th>Nationality</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for player in team.squad %}
+                    <tr typeof="Person" property="athlete">
+                        <td><span property="name">{{ player.name }}</span></td>
+                        <td>{{ player.position }}</td>
+                        <td>
+                            <time property="birthDate" datetime="{{ player.dateOfBirth }}"
+                                  content="{{ player.dateOfBirth }}">
+                                {{ player.dateOfBirth }}
+                            </time>
+                        </td>
+                        <td><span property="nationality">{{ player.nationality }}</span></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No players in the squad.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+{% endblock %}

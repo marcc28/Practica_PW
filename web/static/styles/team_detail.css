@@ -1,0 +1,185 @@
+/* Botón volver */
+#btn-volver {
+    background-color: #27ae60;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+}
+#btn-volver:hover {
+    background-color: #219150;
+}
+
+/* Cabecera personalizada del equipo (evita conflicto con <header>) */
+.team-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #27ae60;
+    padding-bottom: 0.8rem;
+}
+
+.team-header .crest {
+    width: 80px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.15);
+}
+
+.team-header h1 {
+    font-size: 2rem;
+    color: #133502;
+    margin: 0;
+}
+
+/* Información básica */
+.info-basic p strong {
+    color: #27ae60;
+}
+
+.info-basic p {
+    margin: 0.4rem 0;
+}
+
+.flag {
+    width: 24px;
+    height: auto;
+    margin-left: 0.3rem;
+    vertical-align: middle;
+}
+
+/* Enlaces web */
+.website {
+    color: #27ae60;
+    text-decoration: none;
+}
+.website:hover {
+    text-decoration: underline;
+}
+
+/* Competiciones */
+.competitions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.competition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    text-align: center;
+}
+
+.competition img {
+    max-width: 60px;
+    margin-bottom: 0.4rem;
+}
+
+/* Entrenador */
+.coach h2 {
+    margin-top: 2rem;
+    color: #27ae60;
+}
+.coach p {
+    margin: 0.3rem 0;
+}
+.coach strong {
+    color: #133502;
+}
+
+/* Plantilla */
+.squad h2 {
+    margin-top: 2rem;
+    color: #27ae60;
+}
+
+#tabla-plantilla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+#tabla-plantilla th, #tabla-plantilla td {
+    border: 1px solid #ddd;
+    padding: 0.6rem;
+    text-align: left;
+}
+
+#tabla-plantilla th {
+    background-color: #9dfd6d;
+    color: #133502;
+}
+
+.center-text {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+.competitions h2 {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem; /* espacio extra debajo del título */
+    color: #27ae60;
+}
+
+/* Tabla para la plantilla (squad) */
+.squad table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.squad thead th {
+    background-color: #9dfd6d;  /* Verde claro similar a tu tabla */
+    color: #133502;             /* Verde oscuro */
+    padding: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+.squad tbody td {
+    padding: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+.squad tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.squad tbody tr:hover {
+    background-color: #e6f2ff; /* Azul muy suave para hover */
+    cursor: default;
+}
+
+.squad td time {
+    font-style: normal;
+    color: #555;
+}
+
+/* Mensaje cuando no hay jugadores */
+.squad tbody tr td[colspan="4"] {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    padding: 20px;
+}
+
+
+

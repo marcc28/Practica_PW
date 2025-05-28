@@ -13,11 +13,14 @@ urlpatterns = [
     path('teams/', teamView, name='teams'),
     path('players/', playerView, name='players'),
 
-    #Teams urls
+    # Teams urls
     path('team/create/', TeamCreate, name='team-create'),
     path('teams/api/teams/', views.getTeams, name='getTeams'),
     path('team/<int:equipo_id>/edit', TeamUpdate, name='team-edit'),
     path('team/<int:equipo_id>/delete/', TeamDelete, name='team-delete'),
+    path('teams/<int:pk>/', views.team_detail, name='team_detail'),
+    path('team/<int:pk>/', views.team_detail_page, name='team_detail'),
+
 
     # match urls
     path('matches/create/', MatchCreate, name='match-create'),

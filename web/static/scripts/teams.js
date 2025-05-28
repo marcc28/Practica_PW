@@ -24,21 +24,16 @@ $(document).ready(function () {
         $('#modal-overlay').addClass('hidden');
     });
 
-    $('#btn-delete-team').on('click', function (e){
+    $('#btn-delete-team').on('click', function (e) {
         e.preventDefault()
         $.ajax({
-            url: `/team/${teamId}/delete/`,
-            method: 'DELETE',
-            contentType: 'application/json',
-            headers: {
+            url: `/team/${teamId}/delete/`, method: 'DELETE', contentType: 'application/json', headers: {
                 'X-CSRFToken': getCookie('csrftoken')
-            },
-            success: function () {
+            }, success: function () {
                 loadTeams()
                 $('#modal-overlay').addClass('hidden');
                 $('#edit-modal').addClass('hidden');
-            },
-            error: function () {
+            }, error: function () {
                 alert('Error al eliminar equipo');
             }
         });
@@ -64,24 +59,17 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: `/team/${equipoId}/edit`,
-            method: 'PUT',
-            contentType: 'application/json',
-            headers: {
+            url: `/team/${equipoId}/edit`, method: 'PUT', contentType: 'application/json', headers: {
                 'X-CSRFToken': getCookie('csrftoken')
-            },
-            data: JSON.stringify(datosActualizados),
-            success: function () {
+            }, data: JSON.stringify(datosActualizados), success: function () {
                 loadTeams()
                 $('#modal-overlay').addClass('hidden');
                 $('#edit-modal').addClass('hidden');
-            },
-            error: function () {
+            }, error: function () {
                 alert('Error al actualizar equipo');
             }
         });
     });
-
 
 
     // Guardar equipo nuevo
@@ -104,24 +92,15 @@ $(document).ready(function () {
 
         $.ajax({
             url: '/team/create/',  // Aquí va el POST
-            method: 'POST',
-            contentType: 'application/json',
-            headers: {
+            method: 'POST', contentType: 'application/json', headers: {
                 'X-CSRFToken': getCookie('csrftoken')
-            },
-            data: JSON.stringify({
-                name: nombre,
-                crest: crest,
-                founded: fundado,
-                venue: estadio,
-                coach: entrenador
-            }),
-            success: function (data) {
+            }, data: JSON.stringify({
+                name: nombre, crest: crest, founded: fundado, venue: estadio, coach: entrenador
+            }), success: function (data) {
                 loadTeams()
                 $('#modal-overlay').addClass('hidden');
                 $('#create-modal').addClass('hidden');
-            },
-            error: function (xhr, status, error) {
+            }, error: function (xhr, status, error) {
                 console.error('Error al crear equipo:', error);
                 alert('Error al crear el equipo');
             }
@@ -134,20 +113,25 @@ function renderEquipos(lista) {
     $ul.empty();
     lista.forEach(equipo => {
         const $tr = $(`<tr>
-                        <td><img src="${equipo.crest}" alt="escudo de ${equipo.name}"></td>
-                        <td>${equipo.name}</td>
-                        <td>${equipo.founded}</td>
-                        <td>${equipo.venue}</td>
-                        <td>${equipo.coach?.name || equipo.coach || 'Desconocido'}</td>
+            <td><img src="${equipo.crest}" alt="escudo de ${equipo.name}"></td>
+            <td>${equipo.name}</td>
+            <td>${equipo.founded}</td>
+            <td>${equipo.venue}</td>
+            <td>${equipo.coach?.name || equipo.coach || 'Desconocido'}</td>
+            <td>
+                <a href="/team/${equipo.id}/" title="View details">
+                    More
+                </a>
+            </td>
         </tr>`);
-        $tr.on('click', function () {
 
-            // Marca como seleccionado el actual
+        $tr.on('click', function () {
             $(this).addClass('equipo-seleccionado');
 
-            // Mostrar modal u otra acción
             const userId = document.body.dataset.userId;
-            console.log(equipo);
+
+            // Prevenir conflicto con clic en enlace
+            if ($(event.target).is('a')) return;
 
             if (equipo["creador_id"] == userId) {
                 teamId = equipo.id;
@@ -155,7 +139,7 @@ function renderEquipos(lista) {
             } else {
                 mostrarModal(equipo);
             }
-        })
+        });
         $ul.append($tr);
     });
 }
@@ -171,8 +155,6 @@ function mostrarModal(equipo) {
     $('#modal-tla').text(equipo.tla || 'Desconocido');
     $('#modal-web').attr('href', equipo.website || 'Desconocido');
     $('#modal-web').text(equipo.website || 'Desconocido');
-
-
 
 
     $('#modal-overlay').removeClass('hidden')
@@ -210,13 +192,11 @@ function getCookie(name) {
 function loadTeams() {
     $.ajax({
         url: 'api/teams', // Cambia por tu URL real o endpoint local
-        method: 'GET',
-        success: function (response) {
+        method: 'GET', success: function (response) {
             $('#mensaje-error').hide();
             equipos = response;
             renderEquipos(equipos)
-        },
-        error: function (xhr, status, error) {
+        }, error: function (xhr, status, error) {
             $('#mensaje-error').show();
             console.error('Error al recuperar datos:', error);
         }
