@@ -331,16 +331,6 @@ def fetch_all_teams():
 
     return equipos_serializados + equipos_api
 
-def team_detail(request, pk):
-    headers = {
-        "X-Auth-Token": "0ba4dbb5a5674096a1ae842cfe22366f"
-    }
-    api_url = f"https://api.football-data.org/v4/teams/{pk}"
-    response = requests.get(api_url, headers=headers)
-    if response.status_code == 200:
-        return JsonResponse(response.json())
-    else:
-        return JsonResponse({'error': 'Team not found'}, status=404)
 
 def team_detail_page(request, pk):
     headers = {
