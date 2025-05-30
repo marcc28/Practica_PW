@@ -1,19 +1,55 @@
+let todosLosPartidos = [];
+
 $(document).ready(function () {
     cargarPartidos();
+    $('#selector-jornada').on('change', function () {
+        const jornadaSeleccionada = parseInt($(this).val());
+        mostrarPartidosDeJornada(jornadaSeleccionada);
+    });
 });
 
 function cargarPartidos() {
     $.ajax({
-        url: 'api/match/',  // Asegúrate de que esta URL coincide con tu ruta Django
+        url: 'api/match/',
         method: 'GET',
         success: function (partidos) {
             $('#mensaje-error').hide();
-            renderizarPartidos(partidos);
+            todosLosPartidos = partidos;
+
+            const jornadas = obtenerJornadas(partidos);
+            poblarSelectorJornadas(jornadas);
+
+            const jornadaPorDefecto = Math.max(...jornadas);
+            $('#selector-jornada').val(jornadaPorDefecto);
+            mostrarPartidosDeJornada(jornadaPorDefecto);
         },
         error: function () {
             $('#mensaje-error').show();
         }
     });
+}
+
+function obtenerJornadas(partidos) {
+    const jornadasSet = new Set();
+    partidos.forEach(p => {
+        if (p.matchday != null) {
+            jornadasSet.add(p.matchday);
+        }
+    });
+    return Array.from(jornadasSet).sort((a, b) => a - b);
+}
+
+function poblarSelectorJornadas(jornadas) {
+    const $selector = $('#selector-jornada');
+    $selector.empty();
+    jornadas.forEach(jornada => {
+        $selector.append(`<option value="${jornada}">Matchday ${jornada}</option>`);
+    });
+}
+
+function mostrarPartidosDeJornada(jornada) {
+    const filtrados = todosLosPartidos.filter(p => p.matchday === jornada);
+    renderizarPartidos(filtrados);
 }
 
 function renderizarPartidos(partidos) {
@@ -41,7 +77,6 @@ function renderizarPartidos(partidos) {
             </tr>
         `);
 
-        // Evento click para mostrar popup
         $fila.on('click', function () {
             const detalleHtml = `
                 <div class="popup-header">
@@ -60,7 +95,6 @@ function renderizarPartidos(partidos) {
                     </div>
                 </div>
             `;
-
             $('#contenido-partido').html(detalleHtml);
             $('#popup-partido').fadeIn();
         });
@@ -68,12 +102,10 @@ function renderizarPartidos(partidos) {
         $tabla.append($fila);
     });
 
-    // Cerrar popup al clicar en la X
     $('#cerrar-popup').on('click', function () {
         $('#popup-partido').fadeOut();
     });
 
-    // También cerrar popup si se hace click fuera del contenido
     $('#popup-partido').on('click', function (e) {
         if (e.target === this) {
             $(this).fadeOut();

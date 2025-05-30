@@ -5,7 +5,10 @@
     <script src="{% static 'scripts/matches.js' %}"></script>
     <link rel="stylesheet" href="{% static 'styles/matches.css' %}">
 
-    <h1>Recent matches</h1>
+    <h1>Matches</h1>
+
+    <select id="selector-jornada"></select>
+
     <table id="tabla-matches">
         <thead>
         <tr>
@@ -18,6 +21,7 @@
         </thead>
         <tbody></tbody>
     </table>
+
     <div id="popup-partido" class="popup-modal" style="display:none;">
         <div class="popup-contenido">
             <span id="cerrar-popup" style="cursor:pointer; float:right; font-size:20px;">&times;</span>

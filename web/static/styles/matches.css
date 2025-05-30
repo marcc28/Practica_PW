@@ -181,3 +181,34 @@
     /* Si quieres un tamaño fijo puedes usar height, pero no es obligatorio */
 }
 
+/* Estilo para el selector de jornada */
+#selector-jornada {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1.5px solid #9dfd6d;
+    border-radius: 6px;
+    background-color: white;
+    color: #133502;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    outline: none;
+    min-width: 150px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 5px;
+}
+
+#selector-jornada:hover,
+#selector-jornada:focus {
+    border-color: #7cd14a;
+    box-shadow: 0 0 8px #7cd14a;
+}
+
+/* Label del selector para que tenga un poco de margen */
+label[for="selector-jornada"] {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: 0.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
