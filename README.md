@@ -43,6 +43,10 @@ Desenvolupar una aplicació funcional que permeti consultar dades del món del f
 - `Escalabilitat`: El projecte està dissenyat perquè sigui fàcilment ampliable en futures versions, tant pel que fa a models com a funcionalitats addicionals.
 - `Accessibilitat`: L'estructura visual i la navegació han estat simplificades per garantir una experiència d'usuari fluida i entenedora.
 
+## ☝️ Consideracions de disseny (deliverable 3)
+- `Implementació pàgina details d'equip`: S'ha implementat un apartat "details" per cada equip per poder afegir marcatge semàntic basat en RDFa. En aquesta pàgina mostrem totes les dades que tinguem de qualsevol equip que no hagi creat un usuari.
+- `Edició de la pàgina inicial`: Dins de la pàgina principal, s'ha afegit dos rànkings, un per saber la classificació dels equips de la lliga i una altra per saber el màxims golejadors d'aquesta.
+- `Canvi en Matches`: S'ha canviat la consulta de l'API, doncs en l'anterior entrega sol podies consultar els últims 10 dies mentre que ara, utilitzant un filtre per jornada, pots accedir a qualsevol partit de la temporada.
 ---
 
 ## ▶️ Execució del projecte
