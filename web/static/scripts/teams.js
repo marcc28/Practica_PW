@@ -112,18 +112,23 @@ function renderEquipos(lista) {
     const $ul = $('#tabla-equipos tbody')
     $ul.empty();
     lista.forEach(equipo => {
-        const $tr = $(`<tr>
-            <td><img src="${equipo.crest}" alt="escudo de ${equipo.name}"></td>
-            <td>${equipo.name}</td>
-            <td>${equipo.founded}</td>
-            <td>${equipo.venue}</td>
-            <td>${equipo.coach?.name || equipo.coach || 'Desconocido'}</td>
-            <td>
-                <a href="/teams/${equipo.id}/" title="View details">
-                    More
-                </a>
-            </td>
-        </tr>`);
+        const $tr = $(`
+            <tr>
+                <td><img src="${equipo.crest}" alt="escudo de ${equipo.name}"></td>
+                <td>${equipo.name}</td>
+                <td>${equipo.founded}</td>
+                <td>${equipo.venue}</td>
+                <td>${equipo.coach?.name || equipo.coach || 'Desconocido'}</td>
+                <td>
+                    ${
+                    equipo.creador_id
+                        ? 'No information'
+                        : `<a href="/teams/${equipo.id}/" title="View details">More</a>`
+                }
+                </td>
+            </tr>
+        `);
+
 
         $tr.on('click', function () {
             $(this).addClass('equipo-seleccionado');
@@ -136,29 +141,10 @@ function renderEquipos(lista) {
             if (equipo["creador_id"] == userId) {
                 teamId = equipo.id;
                 showEditModal(equipo);
-            } else {
-                mostrarModal(equipo);
             }
         });
         $ul.append($tr);
     });
-}
-
-
-function mostrarModal(equipo) {
-    const userId = document.body.dataset.userId;
-    // O si usaste window.USER_ID
-    $('#modal-nombre').text(equipo.name || "Desconocido");
-    $('#modal-fundado').text(equipo.founded || 'Desconocido');
-    $('#modal-estadio').text(equipo.venue || 'Desconocido');
-    $('#modal-entrenador').text(equipo.coach?.name || 'Desconocido');
-    $('#modal-tla').text(equipo.tla || 'Desconocido');
-    $('#modal-web').attr('href', equipo.website || 'Desconocido');
-    $('#modal-web').text(equipo.website || 'Desconocido');
-
-
-    $('#modal-overlay').removeClass('hidden')
-    $('#visualize-modal').removeClass('hidden')
 }
 
 function showEditModal(equipo) {
