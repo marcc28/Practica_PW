@@ -151,22 +151,10 @@ def MatchCreate(request):
 
 
 def getMatches(request):
-    from datetime import datetime, timedelta
     headers = {
         "X-Auth-Token": "0ba4dbb5a5674096a1ae842cfe22366f"
     }
-    url = "http://api.football-data.org/v4/matches?competitions=PD"
-
-    # la api solo nos permite recuperar los partidos de los últimos 10 días
-    # si no especificamos fechas solo devuelve los últimos 3 partidos.
-    current_date = datetime.now()
-    ten_days_ago = current_date - timedelta(days=10)
-
-    current_string = current_date.strftime('%Y-%m-%d')
-    ten_string = ten_days_ago.strftime('%Y-%m-%d')
-
-    url += "&dateFrom=" + ten_string
-    url += "&dateTo=" + current_string
+    url = "http://api.football-data.org/v4/competitions/PD/matches"
 
     response = requests.get(url, headers=headers)
 
